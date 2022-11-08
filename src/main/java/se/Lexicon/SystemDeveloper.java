@@ -5,9 +5,9 @@ import java.util.Arrays;
 public class SystemDeveloper extends Employee {
 
     //fields
-    private String[] certificate;
+    private String[] certificates = new String[0];
 
-    private String[] languages;
+    private String[] languages = new String[0];
 
 
     //constructors
@@ -18,8 +18,8 @@ public class SystemDeveloper extends Employee {
     //methods
     @Override
     public void calculateSalary() {
-        if (certificate != null) {
-            int addOnSalary = 1000 * certificate.length;
+        if (certificates != null) {
+            int addOnSalary = 1000 * certificates.length;
 
             if (languages != null) {
                 int addOnSalary1 = 1500 * languages.length;
@@ -30,32 +30,43 @@ public class SystemDeveloper extends Employee {
     }
 
     public String DeveloperInformation(){
-        StringBuilder stringBuilder = new StringBuilder();
 
-        if (certificate == null || certificate.length == 0){
-            return "No certificates";}
-        for (String certificate : certificate){
-            stringBuilder.append(certificate).append(" - ");}
-        if (languages == null || languages.length == 0){
-            return "No languages";}
-        for (String languages : languages){
-            stringBuilder.append(languages).append(" - ");
-        }
-        return stringBuilder.toString();
+        return "Employee id : " + getId() +"  Clients Information : " + Arrays.toString(certificates) + "  acquiredClients: " + Arrays.toString(languages);
     }
+
 
     @Override
     public String toString() {
-        return "Certificate: "+  Arrays.toString(certificate)+ "Languages: " + Arrays.toString(languages) ;
+        return "SystemDeveloper{" +
+                "certificate=" + Arrays.toString(certificates) +
+                ", languages=" + Arrays.toString(languages) +
+                '}';
+    }
+
+    public void addCertificates(String certificate){
+        // todo:
+        String[] newcertificate = Arrays.copyOf(certificates,certificates.length + 1);
+        newcertificate[newcertificate.length -1] = certificate;
+        certificates = newcertificate;
+
+        // define a method that can expand the clients array and add a new element on it
+    }
+    public void addLanguages(String client){
+        // todo:
+        String[] newlanguages = Arrays.copyOf(languages,languages.length + 1);
+        newlanguages[newlanguages.length -1] = client;
+        languages = newlanguages;
+
+        // define a method that can expand the clients array and add a new element on it
     }
 
     //getters & setters
     public String[] getCertificate() {
-        return certificate;
+        return certificates;
     }
 
     public void setCertificate(String[] certificate) {
-        this.certificate = certificate;
+        this.certificates = certificate;
         calculateSalary();
     }
 

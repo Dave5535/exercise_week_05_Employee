@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class SalesPerson extends Employee {
     //fields
-    private String[] clients;
+    private String[] clients = new String[0];
     private int acquiredClients;
 
     public SalesPerson(String name) {
@@ -17,7 +17,7 @@ public class SalesPerson extends Employee {
 
 
     @Override
-    public void calculateSalary(){
+    public void calculateSalary() {
         if (clients != null) {
             int addOnSalary = 500 * clients.length;
 
@@ -29,28 +29,29 @@ public class SalesPerson extends Employee {
 
     }
 
-    public String salespersonInformation(){
-        StringBuilder stringBuilder = new StringBuilder();
-
-        if (clients == null || clients.length == 0){
-            return "No certificates";}
-        for (String clients : clients){
-            stringBuilder.append(clients).append(" - ");}
-        if (acquiredClients == 0){
-            return "No old clients";}
-
-
-        return stringBuilder.toString() + "number of old clients: " + acquiredClients ;
+    public String salespersonInformation() {
+        return "Employee id : " +getId() + "  Clients Information : " + Arrays.toString(clients) + " acquiredClients: " + acquiredClients;
     }
+
     @Override
     public String toString() {
-        return "Salesman: {" + "Name: " + getName() +
-                ", Clients: " + Arrays.toString(clients)  +
+        return "SalesPerson{" +
+                "clients=" + Arrays.toString(clients) +
+                ", acquiredClients=" + acquiredClients +
                 '}';
     }
 
+    public void addClientToClients(String client){
+        // todo:
+        String[] newClient = Arrays.copyOf(clients,clients.length + 1);
+        newClient[newClient.length -1] = client;
+        clients = newClient;
 
-//getters & setters
+        // define a method that can expand the clients array and add a new element on it
+    }
+
+
+    //getters & setters
     public String[] getClients() {
         return clients;
     }
